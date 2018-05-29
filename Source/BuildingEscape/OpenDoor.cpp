@@ -32,23 +32,16 @@ void UOpenDoor::BeginPlay()
 // "Open" the door.
 void UOpenDoor::OpenDoor()
 {
-	// Create a rotator.
-	FRotator NewRotation = FRotator(0.0f, OpenAngle, 0.0f);
-
 	// Set the door rotation.
-	if (!Owner) { return; }
-	Owner->SetActorRotation(NewRotation);
+	//Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));
+	OnOpenRequest.Broadcast();
 }
 
 // "Close" the door.
 void UOpenDoor::CloseDoor()
 {
-	// Create a rotator.
-	FRotator NewRotation = FRotator(0.0f, 0.0f, 0.0f);
-
 	// Set the door rotation.
-	if (!Owner) { return; }
-	Owner->SetActorRotation(NewRotation);
+	Owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
 }
 
 // Called every frame
