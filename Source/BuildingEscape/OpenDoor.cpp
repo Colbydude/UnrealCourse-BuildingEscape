@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 
@@ -71,6 +72,9 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate() const
 	PressurePlate->GetOverlappingActors(OUT OverlappingActors);
 	
 	// Iterate through them adding their masses.
+	for (const auto* Actor : OverlappingActors) {
+		TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+	}
 
 	return TotalMass;
 }
